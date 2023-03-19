@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Subject</th>
+      <th>Qty</th>
+      <th>Authors</th>
+      <th>Avail Books</th>
+      <th>Price,Count</th>
+      <th>PublishDate</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of this.allBooks">
+      <td>{{ book.id }}</td>
+      <td>{{ book.subject }}</td>
+      <td>{{ book.bookQty }}</td>
+      <td>
+        <span>{{ book.authors | slice: 0:limit }}</span>
+        <!--<span>{{ book.authors | readMore:limit:showAll }}</span>
+        <button class="btn-primary" (click)="triggerReadMore()" *ngIf="!showAll">Read More</button>
+        <span class="show-more" *ngIf="book.authors && book.authors.length > limit" [pTooltip]="book.authors">
+          {{ book.authors}}
+        </span>-->
+      </td>
+      <td>{{ book.availBooks }}</td>
+      <td>{{ book.price }}, {{ book.pageCount }}</td>
+      <td>{{ book.publishedDate }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,56 @@
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {BookService} from "../../services/book/book.service";
+import {Book} from "../../models/books/book";
+import {Subject} from "rxjs";
+
+@Component({
+  selector: 'app-list-all-books',
+  templateUrl: './list-all-books.component.html',
+  styleUrls: ['./list-all-books.component.css']
+})
+export class ListAllBooksComponent implements OnInit,OnDestroy{
+  allBooks: Book[];
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+  @Input() limit: number = 20;
+  public showAll: any = false;
+  constructor(private bookService: BookService) { }
+
+  ngOnInit(): void {
+    this.dtOptions = {
+      destroy: true,
+      ordering: true,
+      scrollY: '550px',
+      pagingType: 'full_numbers',
+      pageLength: 25,
+      processing: true,
+      columnDefs: [{
+        targets: 0
+      }]
+    };
+
+    this.listAllBooks();
+  }
+
+  async listAllBooks() {
+    this.bookService.listAllBooks().subscribe((data : any) => {
+        if (data != null) {
+          this.allBooks = data;
+          this.dtTrigger.next(null);
+        }
+      },
+      (error : any)=> {
+        if (error) {
+          if (error.status == 404) {
+            if(error.error && error.error.message){
+              this.allBooks = [];
+            }
+          }
+        }
+      });
+  }
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
+
+}
