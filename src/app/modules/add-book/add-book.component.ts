@@ -68,7 +68,8 @@ export class AddBookComponent {
         this.isSignUpFailed = false;
       },
       err => {
-        this.errorMessage = err.error.message;
+        console.log("Create Failed::"+err);
+        this.errorMessage = err.message;
         this.isSignUpFailed = true;
       }
     );
@@ -87,6 +88,8 @@ export class AddBookComponent {
       backdropClass: "modal-backdrop",
       windowClass : "myCustomModalClass"
     })
+    this.isSuccessful = false;
+    this.form = new Book();
   }
   closeModal(){
     this.modalService.close(this.modalRef);

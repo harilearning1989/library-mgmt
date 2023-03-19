@@ -141,12 +141,12 @@
                            [(ngModel)]="form.authors" required minlength="3" id="authorsForm"
                            maxlength="20" #authors="ngModel"/>
                     <div class="alert alert-danger validationError" *ngIf="authors.errors && f.submitted">
-                      <div *ngIf="authors.errors.required">authors is required</div>
+                      <div *ngIf="authors.errors.required">Authors is required</div>
                       <div *ngIf="authors.errors.minlength">
-                        authors must be at least 3 characters
+                        Authors must be at least 3 characters
                       </div>
                       <div *ngIf="authors.errors.maxlength">
-                        authors must be at most 20 characters
+                        Authors must be at most 20 characters
                       </div>
                     </div>
                   </div>
@@ -156,10 +156,10 @@
                   <div class="form-group">
                     <label for="bookQtyForm">BookQty</label>
                     <input type="text" class="form-control" name="bookQty" id="bookQtyForm"
-                           [(ngModel)]="form.bookQty" required minlength="3"
+                           [(ngModel)]="form.bookQty" required minlength="3" min="1"
                            maxlength="20" #bookQty="ngModel"/>
                     <div class="alert alert-danger validationError" *ngIf="bookQty.errors && f.submitted">
-                      <div *ngIf="bookQty.errors.required">bookQty is required</div>
+                      <div *ngIf="bookQty.errors.required">BookQty is required</div>
                       <div *ngIf="bookQty.errors.minlength">
                         BookQty must be at least 3 characters
                       </div>
@@ -176,12 +176,12 @@
                            [(ngModel)]="form.price" required minlength="3"
                            maxlength="20" #price="ngModel"/>
                     <div class="alert alert-danger validationError" *ngIf="price.errors && f.submitted">
-                      <div *ngIf="price.errors.required">price is required</div>
+                      <div *ngIf="price.errors.required">Price is required</div>
                       <div *ngIf="price.errors.minlength">
-                        price must be at least 3 characters
+                        Price must be at least 3 characters
                       </div>
                       <div *ngIf="price.errors.maxlength">
-                        price must be at most 20 characters
+                        Price must be at most 20 characters
                       </div>
                     </div>
                   </div>
@@ -195,12 +195,12 @@
                            [(ngModel)]="form.publishedDate" required minlength="3"
                            maxlength="20" #publishedDate="ngModel"/>
                     <div class="alert alert-danger validationError" *ngIf="publishedDate.errors && f.submitted">
-                      <div *ngIf="publishedDate.errors.required">publishedDate is required</div>
+                      <div *ngIf="publishedDate.errors.required">PublishedDate is required</div>
                       <div *ngIf="publishedDate.errors.minlength">
-                        publishedDate must be at least 3 characters
+                        PublishedDate must be at least 3 characters
                       </div>
                       <div *ngIf="publishedDate.errors.maxlength">
-                        publishedDate must be at most 20 characters
+                        PublishedDate must be at most 20 characters
                       </div>
                     </div>
                   </div>
@@ -212,12 +212,12 @@
                            [(ngModel)]="form.categories" required minlength="3"
                            maxlength="20" #categories="ngModel"/>
                     <div class="alert alert-danger validationError" *ngIf="categories.errors && f.submitted">
-                      <div *ngIf="categories.errors.required">shortDescription is required</div>
+                      <div *ngIf="categories.errors.required">Categories is required</div>
                       <div *ngIf="categories.errors.minlength">
-                        categories must be at least 3 characters
+                        Categories must be at least 3 characters
                       </div>
                       <div *ngIf="categories.errors.maxlength">
-                        categories must be at most 20 characters
+                        Categories must be at most 20 characters
                       </div>
                     </div>
                   </div>
@@ -231,12 +231,12 @@
                            [(ngModel)]="form.shortDescription" required minlength="3"
                            maxlength="20" #shortDescription="ngModel"/>
                     <div class="alert alert-danger validationError" *ngIf="shortDescription.errors && f.submitted">
-                      <div *ngIf="shortDescription.errors.required">shortDescription is required</div>
+                      <div *ngIf="shortDescription.errors.required">ShortDescription is required</div>
                       <div *ngIf="shortDescription.errors.minlength">
-                        shortDescription must be at least 3 characters
+                        ShortDescription must be at least 3 characters
                       </div>
                       <div *ngIf="shortDescription.errors.maxlength">
-                        shortDescription must be at most 20 characters
+                        ShortDescription must be at most 20 characters
                       </div>
                     </div>
                   </div>
@@ -248,12 +248,12 @@
                            [(ngModel)]="form.longDescription" required minlength="3"
                            maxlength="20" #longDescription="ngModel"/>
                     <div class="alert alert-danger validationError" *ngIf="longDescription.errors && f.submitted">
-                      <div *ngIf="longDescription.errors.required">longDescription is required</div>
+                      <div *ngIf="longDescription.errors.required">LongDescription is required</div>
                       <div *ngIf="longDescription.errors.minlength">
-                        longDescription must be at least 3 characters
+                        LongDescription must be at least 3 characters
                       </div>
                       <div *ngIf="longDescription.errors.maxlength">
-                        longDescription must be at most 20 characters
+                        LongDescription must be at most 20 characters
                       </div>
                     </div>
                   </div>
@@ -303,7 +303,7 @@
             </div>
 
             <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-              Signup failed!<br/>{{ errorMessage }}
+              Signup failed! Record already Exists<br/>{{ errorMessage }}
             </div>
           </form>
 

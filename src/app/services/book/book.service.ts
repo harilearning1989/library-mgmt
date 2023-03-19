@@ -13,7 +13,7 @@ export class BookService {
     listAllBooks: this.apiUrl + "/all",
     availableBooks: this.apiUrl + "/availableBooks",
     searchBook: this.apiUrl + "/searchBook",
-    saveEmployee: this.apiUrl + "/api/employee/saveEmployee"
+    saveBookUrl: this.apiUrl + "/create"
   }
 
   constructor(private httpClient: HttpClient) { }
@@ -28,6 +28,10 @@ export class BookService {
   }
 
   saveBook(addBookForm: Book) {
+    return this.httpClient.post(this.httpLink.saveBookUrl, addBookForm);
+  }
+
+  saveBookTemp(addBookForm: Book) {
     return this.httpClient.get<Book[]>(this.httpLink.availableBooks);
   }
 

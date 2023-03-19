@@ -1,1 +1,287 @@
-<p>update-book works!</p>
+<div class="card border-primary" style="width: 66rem;left: 30px">
+  <div class="card-body">
+    <!--<h4 class="card-title bg-primary">Card title</h4>-->
+    <form #bookForm="ngForm">
+      <table>
+        <tr>
+          <td>ISBN</td>&nbsp;&nbsp;
+          <td><input type="text" class="form-control" id="isbn" required maxlength="255"
+                     [(ngModel)]="searchBookForm.isbn" name="isbn" #isbn="ngModel">
+            <div *ngIf="isbn.errors && isSubmitted" class="alert alert-danger validationError">
+              <div [hidden]="!isbn.errors?.['required']">
+                ISBN is required
+              </div>
+            </div>
+          </td>
+          &nbsp;&nbsp;
+          <td>Subject</td>&nbsp;&nbsp;
+          <td><input type="text" class="form-control" id="subject" required maxlength="255"
+                     [(ngModel)]="searchBookForm.subject" name="subject" #subject="ngModel">
+            <div *ngIf="subject.errors && isSubmitted" class="alert alert-danger validationError">
+              <div [hidden]="!subject.errors?.['required']">
+                Subject is required
+              </div>
+            </div>
+          </td>
+          &nbsp;&nbsp;
+          <td>BookName</td>&nbsp;&nbsp;
+          <td><input type="text" class="form-control" id="bookName" required maxlength="255"
+                     [(ngModel)]="searchBookForm.bookName" name="bookName" #bookName="ngModel">
+            <div *ngIf="bookName.errors && isSubmitted" class="alert alert-danger validationError">
+              <div [hidden]="!bookName.errors?.['required']">
+                BookName is required
+              </div>
+            </div>
+          </td>
+          &nbsp;&nbsp;
+          <td>
+            <button class="btn btn-success" (click)="searchBook(bookForm.form.valid)">Search</button>
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <br/>
+    <table class="table">
+      <thead class="bg-primary text-white">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ISBN</th>
+        <th scope="col">Book Name</th>
+        <th scope="col">Subject</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let book of this.searchAllBooks">
+        <td>{{ book.id }}</td>
+        <td>{{ book.isbn }}</td>
+        <td>{{ book.bookName }}</td>
+        <td>{{ book.subject }}</td>
+        <td>
+          <button class="btn btn-success" type="button" (click)="openModal(book)">UpdateBook</button>
+          <button class="btn btn-success" type="button" (click)="openModal(book)">DeleteBook</button>
+        </td>
+        <!--(onOpen)="" (onClose)=""-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <modal #myModal>
+    <modal-header>
+      <h3 class="text-primary">Add New Book</h3>
+    </modal-header>
+    <modal-content>
+
+      <div class="col-xl-12">
+        <div class="card card-container">
+          <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm" novalidate>
+            <table class="table">
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <label for="subjectForm">Subject</label>
+                    <input type="text" class="form-control" name="subject" id="subjectForm"
+                           [(ngModel)]="form.subject" required minlength="3"
+                           maxlength="20" #subject="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="subject.errors && f.submitted">
+                      <div *ngIf="subject.errors.required">Subject is required</div>
+                      <div *ngIf="subject.errors.minlength">
+                        Subject must be at least 3 characters
+                      </div>
+                      <div *ngIf="subject.errors.maxlength">
+                        Subject must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label for="bookNameForm">Book Name</label>
+                    <input type="text" class="form-control" name="bookName" id="bookNameForm"
+                           [(ngModel)]="form.bookName" required minlength="3"
+                           maxlength="20" #bookName="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="bookName.errors && f.submitted">
+                      <div *ngIf="bookName.errors.required">BookName is required</div>
+                      <div *ngIf="bookName.errors.minlength">
+                        BookName must be at least 3 characters
+                      </div>
+                      <div *ngIf="bookName.errors.maxlength">
+                        BookName must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <label for="isbnForm">ISBN</label>
+                    <input type="text" class="form-control" name="isbn" id="isbnForm"
+                           [(ngModel)]="form.isbn" required minlength="3"
+                           maxlength="20" #isbn="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="isbn.errors && f.submitted">
+                      <div *ngIf="isbn.errors.required">isbn is required</div>
+                      <div *ngIf="isbn.errors.minlength">
+                        isbn must be at least 3 characters
+                      </div>
+                      <div *ngIf="isbn.errors.maxlength">
+                        isbn must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label for="authorsForm">Authors</label>
+                    <input type="text" class="form-control" name="authors"
+                           [(ngModel)]="form.authors" required minlength="3" id="authorsForm"
+                           maxlength="20" #authors="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="authors.errors && f.submitted">
+                      <div *ngIf="authors.errors.required">Authors is required</div>
+                      <div *ngIf="authors.errors.minlength">
+                        Authors must be at least 3 characters
+                      </div>
+                      <div *ngIf="authors.errors.maxlength">
+                        Authors must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <label for="bookQtyForm">BookQty</label>
+                    <input type="text" class="form-control" name="bookQty" id="bookQtyForm"
+                           [(ngModel)]="form.bookQty" required minlength="3" min="1"
+                           maxlength="20" #bookQty="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="bookQty.errors && f.submitted">
+                      <div *ngIf="bookQty.errors.required">BookQty is required</div>
+                      <div *ngIf="bookQty.errors.minlength">
+                        BookQty must be at least 3 characters
+                      </div>
+                      <div *ngIf="bookQty.errors.maxlength">
+                        BookQty must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label for="priceForm">Price</label>
+                    <input type="text" class="form-control" name="price" id="priceForm"
+                           [(ngModel)]="form.price" required minlength="3"
+                           maxlength="20" #price="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="price.errors && f.submitted">
+                      <div *ngIf="price.errors.required">Price is required</div>
+                      <div *ngIf="price.errors.minlength">
+                        Price must be at least 3 characters
+                      </div>
+                      <div *ngIf="price.errors.maxlength">
+                        Price must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <label for="publishedDateForm">PublishedDate</label>
+                    <input type="text" class="form-control" name="publishedDate" id="publishedDateForm"
+                           [(ngModel)]="form.publishedDate" required minlength="3"
+                           maxlength="20" #publishedDate="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="publishedDate.errors && f.submitted">
+                      <div *ngIf="publishedDate.errors.required">PublishedDate is required</div>
+                      <div *ngIf="publishedDate.errors.minlength">
+                        PublishedDate must be at least 3 characters
+                      </div>
+                      <div *ngIf="publishedDate.errors.maxlength">
+                        PublishedDate must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label for="categories">Categories</label>
+                    <input type="text" class="form-control" name="categories" id="categories"
+                           [(ngModel)]="form.categories" required minlength="3"
+                           maxlength="20" #categories="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="categories.errors && f.submitted">
+                      <div *ngIf="categories.errors.required">Categories is required</div>
+                      <div *ngIf="categories.errors.minlength">
+                        Categories must be at least 3 characters
+                      </div>
+                      <div *ngIf="categories.errors.maxlength">
+                        Categories must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="form-group">
+                    <label for="shortDescriptionForm">ShortDescription</label>
+                    <input type="text" class="form-control" name="shortDescription" id="shortDescriptionForm"
+                           [(ngModel)]="form.shortDescription" required minlength="3"
+                           maxlength="20" #shortDescription="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="shortDescription.errors && f.submitted">
+                      <div *ngIf="shortDescription.errors.required">ShortDescription is required</div>
+                      <div *ngIf="shortDescription.errors.minlength">
+                        ShortDescription must be at least 3 characters
+                      </div>
+                      <div *ngIf="shortDescription.errors.maxlength">
+                        ShortDescription must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <label for="longDescriptionForm">LongDescription</label>
+                    <input type="text" class="form-control" name="longDescription" id="longDescriptionForm"
+                           [(ngModel)]="form.longDescription" required minlength="3"
+                           maxlength="20" #longDescription="ngModel"/>
+                    <div class="alert alert-danger validationError" *ngIf="longDescription.errors && f.submitted">
+                      <div *ngIf="longDescription.errors.required">LongDescription is required</div>
+                      <div *ngIf="longDescription.errors.minlength">
+                        LongDescription must be at least 3 characters
+                      </div>
+                      <div *ngIf="longDescription.errors.maxlength">
+                        LongDescription must be at most 20 characters
+                      </div>
+                    </div>
+                  </div>
+                </td>
+
+              </tr>
+            </table>
+            <div class="form-group text-center">
+              <button class="btn btn-primary btn-block">Update</button>
+            </div>
+
+            <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+              Signup failed! Record already Exists<br/>{{ errorMessage }}
+            </div>
+          </form>
+
+          <div class="alert alert-success" *ngIf="isSuccessful">
+            Update is successful!
+          </div>
+        </div>
+      </div>
+
+    </modal-content>
+    <modal-footer>
+      <button class="btn btn-primary" (click)="closeModal()">close</button>
+    </modal-footer>
+  </modal>
+</div>
