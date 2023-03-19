@@ -44,7 +44,6 @@ export class UpdateBookComponent {
       });
   }
 
-
   openModal(book: Book) {
     this.modalRef = this.modalService.open(this.myModal, {
       size: "lg",//md,xl,lg
@@ -68,7 +67,7 @@ export class UpdateBookComponent {
   }
 
   onSubmit(): void {
-    this.bookService.saveBook(this.form).subscribe(
+    this.bookService.updateBook(this.form).subscribe(
       data => {
         console.log(data);
         this.isSuccessful = true;
@@ -82,4 +81,14 @@ export class UpdateBookComponent {
     );
   }
 
+  deleteBookById(book: Book) {
+  //deleteBookById(id: number) {
+    this.bookService.deleteBookById(book.id)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.searchBook(book);
+        },
+        error => console.log(error));
+  }
 }
