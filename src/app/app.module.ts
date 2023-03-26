@@ -45,15 +45,19 @@ export class AppModule { }
 //npm run build
 
 
-/*npx @angular/cli@14 new library-mgmt*/
-/*npm install --save ngb-modal*/
-/*npm install bootstrap bootstrap-icons*/
+/*sudo npx @angular/cli@14 new library-mgmt*/
+/*npm config set legacy-peer-deps true*/
+/*sudo npm cache clean --force*/
+/*sudo npm install*/
+/*sudo npm install --save ngb-modal*/
+/*sudo chown -R 501:20 "/Users/hariduddukunta/.npm"*/
+/*sudo npm install bootstrap bootstrap-icons*/
 
 /*
-npm install jquery --save
-npm install datatables.net --save
-npm install datatables.net-dt --save
-npm install angular-datatables --save
-npm install @types/jquery --save-dev
-npm install @types/datatables.net --save-dev
+sudo npm install jquery --save
+sudo npm install datatables.net --save
+sudo npm install datatables.net-dt --save
+sudo npm install angular-datatables --save
+sudo npm install @types/jquery --save-dev
+sudo npm install @types/datatables.net --save-dev
  */
