@@ -44,28 +44,6 @@ export class UpdateBookComponent {
       });
   }
 
-  openModal(book: Book) {
-    this.modalRef = this.modalService.open(this.myModal, {
-      size: "lg",//md,xl,lg
-      modalClass: 'mymodal',
-      hideCloseButton: false,
-      centered: false,
-      backdrop: true,
-      animation: true,
-      keyboard: false,
-      closeOnOutsideClick: true,
-      backdropClass: "modal-backdrop",
-      windowClass: "myCustomModalClass"
-    })
-    this.isSuccessful = false;
-    this.form = book;
-  }
-
-  closeModal() {
-    this.modalService.close(this.modalRef);
-    //or this.modalRef.close();
-  }
-
   onSubmit(): void {
     this.bookService.updateBook(this.form).subscribe(
       data => {
@@ -82,7 +60,7 @@ export class UpdateBookComponent {
   }
 
   deleteBookById(book: Book) {
-  //deleteBookById(id: number) {
+    //deleteBookById(id: number) {
     this.bookService.deleteBookById(book.id)
       .subscribe(
         data => {
@@ -90,5 +68,16 @@ export class UpdateBookComponent {
           this.searchBook(book);
         },
         error => console.log(error));
+  }
+
+  displayStyle = "none";
+
+  openPopup(book: Book) {
+    this.isSuccessful = false;
+    this.form = book;
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
   }
 }

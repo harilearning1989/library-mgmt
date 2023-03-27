@@ -15,7 +15,7 @@ export class AddBookComponent {
   isSubmitted: boolean = false;
 
   searchAllBooks: Book[];
-  isShowDiv = true;
+  isShowDiv = false;
 
   isSuccessful = false;
   isSignUpFailed = false;
@@ -28,7 +28,7 @@ export class AddBookComponent {
 
   searchBook(isValid: any) {
     this.isSubmitted = true;
-    if (isValid) {}
+    // if (isValid) {}
 
     this.bookService.searchBook(this.searchBookForm).subscribe(data => {
         if (data != null && data ) {
@@ -38,6 +38,8 @@ export class AddBookComponent {
           this.isShowDiv = true;
           if(this.searchAllBooks.length == 0){
             this.isShowDiv = true;
+          }else{
+            this.isShowDiv = false;
           }
         }
       },
@@ -75,25 +77,13 @@ export class AddBookComponent {
     );
   }
 
-  openModal(){
-    this.modalRef = this.modalService.open(this.myModal, {
-      size: "lg",//md,xl,lg
-      modalClass: 'mymodal',
-      hideCloseButton: false,
-      centered: false,
-      backdrop: true,
-      animation: true,
-      keyboard: false,
-      closeOnOutsideClick: true,
-      backdropClass: "modal-backdrop",
-      windowClass : "myCustomModalClass"
-    })
-    this.isSuccessful = false;
-    this.form = new Book();
+  displayStyle = "none";
+
+  openPopup() {
+    this.displayStyle = "block";
   }
-  closeModal(){
-    this.modalService.close(this.modalRef);
-    //or this.modalRef.close();
+  closePopup() {
+    this.displayStyle = "none";
   }
 
 }

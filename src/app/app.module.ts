@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {ModalModule} from "ngb-modal";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LibraryInterceptor} from "./interceptor/library.interceptor";
 import {ErrorInterceptor} from "./interceptor/error.interceptor";
@@ -17,8 +16,7 @@ import {DataTablesModule} from "angular-datatables";
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    DataTablesModule,
-    ModalModule
+    DataTablesModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:LibraryInterceptor, multi: true},

@@ -44,5 +44,14 @@ export class AppComponent {
       }
     });
   }
+/*
+  displayStyle = "none";
+
+  openPopup() {
+   this.displayStyle = "block";
+   }
+  closePopup() {
+     this.displayStyle = "none";
+   }*/
 }
 
