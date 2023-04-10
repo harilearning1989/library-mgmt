@@ -35,7 +35,7 @@
           </td>
           &nbsp;&nbsp;
           <td>
-            <button class="btn btn-success" (click)="searchBook(bookForm.form.valid)">Search</button>
+            <button class="btn btn-success" (click)="searchBook()">Search</button>
           </td>
         </tr>
       </table>
@@ -63,7 +63,7 @@
           <button class="btn btn-primary" type="button" (click)="openPopup(book)">Update</button>
         </td>
         <td>
-          <button class="btn btn-primary" type="button" (click)="deleteBookById(book)">Delete</button>
+          <button class="btn btn-primary" type="button" (click)="deleteBookById(book.id)">Delete</button>
         </td>
         <!--(onOpen)="" (onClose)=""-->
       </tr>

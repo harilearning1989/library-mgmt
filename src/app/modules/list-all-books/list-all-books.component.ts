@@ -20,7 +20,7 @@ export class ListAllBooksComponent implements OnInit,OnDestroy{
     this.dtOptions = {
       destroy: true,
       ordering: true,
-      scrollY: '550px',
+      scrollY: '500px',
       pagingType: 'full_numbers',
       pageLength: 25,
       processing: true,

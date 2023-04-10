@@ -31,10 +31,6 @@ const routes: Routes = [
         loadChildren: () => import('../list-issued-books/list-issued-books.module').then(m => m.ListIssuedBooksModule)
       },
       {
-        path: 'deleteBook',
-        loadChildren: () => import('../delete-book/delete-book.module').then(m => m.DeleteBookModule)
-      },
-      {
         path: 'contact',
         loadChildren: () => import('../contact/contact.module').then(m => m.ContactModule)
       },

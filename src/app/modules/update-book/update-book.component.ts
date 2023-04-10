@@ -27,20 +27,18 @@ export class UpdateBookComponent {
               private modalService: ModalManager) {
   }
 
-  searchBook(isValid: any) {
+  searchBook() {
     this.isSubmitted = true;
-    if (isValid) {
-    }
-
     this.bookService.searchBook(this.searchBookForm).subscribe(data => {
         if (data != null && data) {
-          console.log("data saved")
           this.searchAllBooks = data;
-          console.log();
+        }else{
+          this.searchAllBooks = [];
         }
       },
       (error: any) => {
-        console.log("error")
+        console.log("error");
+        this.searchAllBooks = [];
       });
   }
 
@@ -59,13 +57,13 @@ export class UpdateBookComponent {
     );
   }
 
-  deleteBookById(book: Book) {
-    //deleteBookById(id: number) {
-    this.bookService.deleteBookById(book.id)
+  deleteBookById(id: number) {
+    this.bookService.deleteBookById(id)
       .subscribe(
         data => {
           console.log(data);
-          this.searchBook(book);
+          //this.searchBook();
+          this.onSubmit();
         },
         error => console.log(error));
   }
