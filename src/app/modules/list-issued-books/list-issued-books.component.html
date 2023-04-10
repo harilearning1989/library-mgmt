@@ -4,25 +4,27 @@
     <thead>
     <tr>
       <th>ID</th>
+      <th>ISBN</th>
       <th>Subject</th>
-      <th>Qty</th>
       <th>Authors</th>
-      <th>Avail Books</th>
       <th>Price,Count</th>
       <th>PublishDate</th>
+      <th>Action</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let book of this.issuedBooks">
       <td>{{ book.id }}</td>
+      <td>{{ book.isbn }}</td>
       <td>{{ book.subject }}</td>
-      <td>{{ book.bookQty }}</td>
       <td>
         <span>{{ book.authors | slice: 0:limit }}</span>
       </td>
-      <td>{{ book.availBooks }}</td>
       <td>{{ book.price }}, {{ book.pageCount }}</td>
       <td>{{ book.publishedDate }}</td>
+      <td>
+        <button style="background-color: cornflowerblue" (click)="returnBook(book.id)">Return</button>
+      </td>
     </tr>
     </tbody>
   </table>

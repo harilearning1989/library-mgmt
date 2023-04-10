@@ -1,25 +1,29 @@
-import { Component } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
+import {LoginService} from "../../services/login/login.service";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   public data: any;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private loginService:LoginService
+  ) {}
   ngOnInit() {
     this.route
       .data
       .subscribe(v => console.log(v));
-
     this.data = this.route.snapshot.data;
+
   }
 
-  ngOnDestroy() {
-    this.data.unsubscribe();
+  logout() {
+    this.loginService.logout();
   }
-
 }

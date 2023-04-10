@@ -11,9 +11,6 @@ export class AppComponent {
   title = 'library-mgmt';
   currentRoute = "/home";
 
-  footerUrl = 'https://www.ganatan.com';
-  footerLink = 'www.ganatan.com';
-
   @ViewChild('myModal') myModal: any;
   private modalRef: any;
   constructor(private modalService: ModalManager,

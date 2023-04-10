@@ -12,6 +12,7 @@ export class BookService {
   private httpLink = {
     listAllBooks: this.apiUrl + "/all",
     availableBooks: this.apiUrl + "/availableBooks",
+    listIssuedBooks: this.apiUrl + "/availableBooks",
     searchBook: this.apiUrl + "/searchBook",
     saveBookUrl: this.apiUrl + "/create",
     updateBookUrl: this.apiUrl + "/updateBook",
@@ -28,6 +29,9 @@ export class BookService {
   listAvailableBooks(): Observable<Book[]> {
     return this.httpClient.get<Book[]>(this.httpLink.availableBooks);
     //return this.httpClient.get<Book[]>(`${this.baseURL}/availableBooks`);
+  }
+  listIssuedBooks(): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(this.httpLink.availableBooks);
   }
 
   saveBook(addBookForm: Book) {

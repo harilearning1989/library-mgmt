@@ -1,28 +1,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {LibraryInterceptor} from "./interceptor/library.interceptor";
-import {ErrorInterceptor} from "./interceptor/error.interceptor";
 import {DataTablesModule} from "angular-datatables";
+import {JwtInterceptor} from "./interceptor/jwt.interceptor";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    DataTablesModule
-  ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass:LibraryInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi: true}
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        DataTablesModule
+    ],
+    providers: [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: JwtInterceptor,
+        multi: true
+      }
+    ],
+    exports: [
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
 

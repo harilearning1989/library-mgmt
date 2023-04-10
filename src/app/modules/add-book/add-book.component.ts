@@ -15,7 +15,7 @@ export class AddBookComponent {
   isSubmitted: boolean = false;
 
   searchAllBooks: Book[];
-  isShowDiv = false;
+  isShowAddBookDiv = false;
 
   isSuccessful = false;
   isSignUpFailed = false;
@@ -31,16 +31,12 @@ export class AddBookComponent {
     // if (isValid) {}
 
     this.bookService.searchBook(this.searchBookForm).subscribe(data => {
-        if (data != null && data ) {
-          console.log("data saved")
+        if (data != null) {
           this.searchAllBooks = data;
-          console.log();
-          this.isShowDiv = true;
-          if(this.searchAllBooks.length == 0){
-            this.isShowDiv = true;
-          }else{
-            this.isShowDiv = false;
-          }
+          this.isShowAddBookDiv = false;
+        }else{
+          this.searchAllBooks = data;
+          this.isShowAddBookDiv = true;
         }
       },
       (error: any) => {
