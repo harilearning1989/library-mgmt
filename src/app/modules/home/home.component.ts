@@ -9,6 +9,7 @@ import {LoginService} from "../../services/login/login.service";
 })
 export class HomeComponent implements OnInit{
   public data: any;
+  userName: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,7 +21,11 @@ export class HomeComponent implements OnInit{
       .data
       .subscribe(v => console.log(v));
     this.data = this.route.snapshot.data;
-
+    const user = this.loginService.userValue;
+    const isLoggedIn = user && user.token;
+    if (isLoggedIn) {
+      this.userName = user.username;
+    }
   }
 
   logout() {

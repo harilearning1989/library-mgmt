@@ -10,7 +10,7 @@
          <!-- <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
                 routerLink="/" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>-->
           <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab"
-             routerLink="./about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
+             routerLink="./about" role="tab" aria-controls="nav-about" aria-selected="false">Home</a>
           <a class="nav-item nav-link" id="nav-list-all-books-tab" data-toggle="tab"
              routerLink="./listAllBooks" role="tab" aria-controls="nav-list-all-books"
              aria-selected="false">List All Books</a>
@@ -22,11 +22,14 @@
              routerLink="./updateBook" role="tab" aria-controls="nav-update-book" aria-selected="false">Update Book</a>
           <a class="nav-item nav-link" id="nav-issued-book-tab" data-toggle="tab"
              routerLink="./issuedBook" role="tab" aria-controls="nav-return-book" aria-selected="false">Issued Book</a>
+          <a class="nav-item nav-link" id="nav-student-tab" data-toggle="tab"
+             routerLink="./manageStudent" role="tab" aria-controls="nav-return-book" aria-selected="false">Student</a>
           <!--<a class="nav-item nav-link" id="nav-return-book-tab" data-toggle="tab"
              routerLink="./returnBook" role="tab" aria-controls="nav-return-book" aria-selected="false">Return Book</a>-->
           <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
              routerLink="./contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
-          <button class="btn-primary" (click)="logout()">Logout</button>
+          <div><span class="text-bg-danger">{{userName}}</span><br/>
+            <button class="btn-primary" (click)="logout()">Logout</button></div>
         </div>
       </nav>
       <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">

@@ -24,6 +24,7 @@ export class LoginService {
     return this.http.post<User>(`${environment.apiUrl}/login`, { username, password })
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
+        user.username = username;
         localStorage.setItem('user', JSON.stringify(user));
         this.userSubject.next(user);
         return user;
@@ -42,11 +43,7 @@ export class LoginService {
   }
   register(user: User) {
     //return this.http.post(`${environment.apiUrl}/register`, user);
-
-    return this.http.post(`${environment.apiUrl}/register`, user)
-      .pipe(map(resp =>{
-        return resp;
-      }))
+    return this.http.post(`${environment.apiUrl}/register`, user);
   }
 
   public get userValue() {

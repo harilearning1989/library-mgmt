@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+const loginModule = () => import('./modules/login/login.module').then(x => x.LoginModule);
+const registerModule = () => import('./modules/register/register.module').then(m => m.RegisterModule);
+const homeModule = () => import('./modules/home/home.module').then(m => m.HomeModule);
+const pageNotFoundModule = () => import('./modules/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule);
+
 const routes: Routes = [
-  { path: 'login',
-    data: { title: 'Login Module' },
-    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule) },
-  { path: 'register',
-    data: { title: 'Register Module' },
-    loadChildren: () => import('./modules/register/register.module').then(m => m.RegisterModule) },
   { path: '', redirectTo: '/login', pathMatch: "full" },
-  { path: 'home',
-    data: { title: 'Home Module' },
-    loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule) },
-  { path: '**' ,
-    data: { title: 'Page Not Module' },
-    loadChildren: () => import('./modules/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule)}
+  { path: 'login',data: { title: 'Login Module' },loadChildren: loginModule},
+  { path: 'register',data: { title: 'Register Module' },loadChildren: registerModule },
+  { path: 'home',data: { title: 'Home Module' },loadChildren: homeModule },
+  { path: '**' ,data: { title: 'Page Not Module' },loadChildren: pageNotFoundModule}
 ];
 
 /*

@@ -29,7 +29,8 @@ export class RegisterComponent implements OnInit {
         InputValidation.cannotContainSpace]],
       lastName: ['', [Validators.required, Validators.minLength(4),
         InputValidation.cannotContainSpace]],
-      email: ['', Validators.required],
+      email: ['', [Validators.required,
+        Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
       phone: ['', [Validators.required,
         Validators.minLength(10), Validators.maxLength(10),
         InputValidation.cannotContainSpace]],
@@ -55,7 +56,7 @@ export class RegisterComponent implements OnInit {
     this.form.value.roles=this.selectedRoles;
     console.log(this.form.value);
     this.loading = true;
-    this.loginService.register(this.form.value)
+    /*this.loginService.register(this.form.value)
       .subscribe({
         next: () => {
           console.log("Success Logged In");
@@ -63,9 +64,25 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['../login'], { relativeTo: this.route });
         },
         error: error => {
-          console.log("Failed");
+          console.log("Register Failed ::"+error);
           //this.alertService.error(error);
+          this.loading = false;
+        }
+      });*/
+
+    this.loginService.register(this.form.value)
+      .subscribe((data : any) => {
+          console.log("Success Logged In");
+          this.alertService.success('Registration successful', { keepAfterRouteChange: true });
           this.router.navigate(['../login'], { relativeTo: this.route });
+      },
+      (error : any)=> {
+        if(error.status == 200){
+          this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+          this.router.navigate(['../login'], { relativeTo: this.route });
+        }else{
+          console.log("Register Failed ::"+error);
+          //this.alertService.error(error);
           this.loading = false;
         }
       });
@@ -73,11 +90,39 @@ export class RegisterComponent implements OnInit {
 
   user_roles: any = [
     {name:'Admin', value:'ROLE_ADMIN', selected: false},
-    {name:'User', value:'ROLE_USER', selected: false}
+    {name:'Student', value:'ROLE_STUDENT', selected: false}
   ]
 
   onChangeCategory(event: any, role: any) {
     this.selectedRoles.push(role.value);
+  }
+
+  omitSpecialChars(event: KeyboardEvent) {
+    let regex = new RegExp("^[a-zA-Z0-9 ]+$");
+    let str = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (event.which === 32){
+      return false;
+    }
+    if (regex.test(str)) {
+      return true;
+    }
+    event.preventDefault();
+    return false;
+  }
+
+
+  omitSpecialCharsNumbers(event: KeyboardEvent) {
+    //let regex = new RegExp("^[a-zA-Z0-9 ]+$");
+    let regex = new RegExp("^[a-zA-Z ]+$");
+    let str = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    if (event.which === 32){
+      return false;
+    }
+    if (regex.test(str)) {
+      return true;
+    }
+    event.preventDefault();
+    return false;
   }
 
 }
