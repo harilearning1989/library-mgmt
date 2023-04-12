@@ -1,1 +1,22 @@
-<p>list-student works!</p>
+<div class="container">
+  <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Mobile</th>
+      <th>Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of this.allStudents">
+      <td>{{ student.studentId }}</td>
+      <td>{{ student.studentName }}</td>
+      <td>{{ student.gender }}</td>
+      <td>{{ student.mobile }}</td>
+      <td>{{ student.category }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -5,6 +5,7 @@ import {first} from "rxjs";
 import {LoginService} from "../../services/login/login.service";
 import {AlertService} from "../../services/alert/alert.service";
 import {InputValidation} from "../../validations/input-validation";
+import {Utils} from "../../utils/utils";
 
 @Component({
   selector: 'app-login',
@@ -64,30 +65,10 @@ export class LoginComponent implements OnInit {
   }
 
   omitSpecialCharsNumbers(event: KeyboardEvent) {
-    //let regex = new RegExp("^[a-zA-Z0-9 ]+$");
-    let regex = new RegExp("^[a-zA-Z ]+$");
-    let str = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-    if (event.which === 32){
-      return false;
-    }
-    if (regex.test(str)) {
-      return true;
-    }
-    event.preventDefault();
-    return false;
+    return Utils.omitSpecialCharsNumbers(event);
   }
 
-
   omitSpecialChars(event: KeyboardEvent) {
-    let regex = new RegExp("^[a-zA-Z0-9 ]+$");
-    let str = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-    if (event.which === 32){
-      return false;
-    }
-    if (regex.test(str)) {
-      return true;
-    }
-    event.preventDefault();
-    return false;
+   return Utils.omitSpecialChars(event);
   }
 }

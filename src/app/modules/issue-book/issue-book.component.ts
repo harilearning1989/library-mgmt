@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../../services/login/login.service";
 import {AlertService} from "../../services/alert/alert.service";
 import {InputValidation} from "../../validations/input-validation";
 import {Utils} from "../../utils/utils";
-
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-issue-book',
+  templateUrl: './issue-book.component.html',
+  styleUrls: ['./issue-book.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class IssueBookComponent implements OnInit {
+
   form!: FormGroup;
   loading = false;
   submitted = false;
@@ -43,10 +43,8 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(20),InputValidation.cannotContainSpace]]
     });
   }
-
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
-
   onSubmit() {
     this.submitted = true;
     // reset alerts on submit
@@ -58,45 +56,23 @@ export class RegisterComponent implements OnInit {
     this.form.value.roles=this.selectedRoles;
     console.log(this.form.value);
     this.loading = true;
-    /*this.loginService.register(this.form.value)
-      .subscribe({
-        next: () => {
-          console.log("Success Logged In");
-          this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-          this.router.navigate(['../login'], { relativeTo: this.route });
-        },
-        error: error => {
-          console.log("Register Failed ::"+error);
-          //this.alertService.error(error);
-          this.loading = false;
-        }
-      });*/
 
     this.loginService.register(this.form.value)
       .subscribe((data : any) => {
           console.log("Success Logged In");
           this.alertService.success('Registration successful', { keepAfterRouteChange: true });
           this.router.navigate(['../login'], { relativeTo: this.route });
-      },
-      (error : any)=> {
-        if(error.status == 200){
-          this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-          this.router.navigate(['../login'], { relativeTo: this.route });
-        }else{
-          console.log("Register Failed ::"+error);
-          //this.alertService.error(error);
-          this.loading = false;
-        }
-      });
-  }
-
-  user_roles: any = [
-    {name:'Admin', value:'ROLE_ADMIN', selected: false},
-    {name:'Student', value:'ROLE_STUDENT', selected: false}
-  ]
-
-  onChangeCategory(event: any, role: any) {
-    this.selectedRoles.push(role.value);
+        },
+        (error : any)=> {
+          if(error.status == 200){
+            this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+            this.router.navigate(['../login'], { relativeTo: this.route });
+          }else{
+            console.log("Register Failed ::"+error);
+            //this.alertService.error(error);
+            this.loading = false;
+          }
+        });
   }
 
   omitSpecialChars(event: KeyboardEvent) {

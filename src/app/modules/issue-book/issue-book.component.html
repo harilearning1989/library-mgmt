@@ -1,0 +1,48 @@
+<div class="card registerDiv">
+  <h4 class="card-header">Register</h4>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">First Name</label>
+        <input type="text" formControlName="firstName" class="form-control"
+               placeholder="Enter First Name"
+               (keypress)="omitSpecialChars($event)"
+               [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+          <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          <div *ngIf="f.firstName.errors.cannotContainSpace">First Name cannot contain spaces</div>
+          <div *ngIf="f.firstName.errors.minlength">First Name must be at least 4 characters</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Last Name</label>
+        <input type="text" formControlName="lastName" class="form-control"
+               placeholder="Enter Last Name"
+               (keypress)="omitSpecialChars($event)"
+               [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+          <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+          <div *ngIf="f.lastName.errors.cannotContainSpace">Last Name cannot contain spaces</div>
+          <div *ngIf="f.lastName.errors.minlength">Last Name must be at least 4 characters</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="text" formControlName="email" class="form-control"
+               placeholder="Enter Email"
+               [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+      <div>
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+          Register
+        </button>
+        <a routerLink="../login" class="btn btn-link">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>

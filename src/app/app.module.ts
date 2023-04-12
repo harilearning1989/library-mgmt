@@ -5,23 +5,25 @@ import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {DataTablesModule} from "angular-datatables";
 import {JwtInterceptor} from "./interceptor/jwt.interceptor";
+import {AuthGuard} from "./guard/auth.guard";
+import { IssueBookComponent } from './modules/issue-book/issue-book.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
         AppComponent,
+        IssueBookComponent,
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        DataTablesModule
+        DataTablesModule,
+        ReactiveFormsModule
     ],
     providers: [
-      {
-        provide: HTTP_INTERCEPTORS,
-        useClass: JwtInterceptor,
-        multi: true
-      }
+      { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      AuthGuard
     ],
     exports: [
     ],

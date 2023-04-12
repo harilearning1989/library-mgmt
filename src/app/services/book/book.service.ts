@@ -8,11 +8,12 @@ import {Book} from "../../models/books/book";
 })
 export class BookService {
   private apiUrl: string = "http://localhost:8081/book";
+  private issueBookApiUrl: string = "http://localhost:8081/issue";
 
   private httpLink = {
     listAllBooks: this.apiUrl + "/all",
     availableBooks: this.apiUrl + "/availableBooks",
-    listIssuedBooks: this.apiUrl + "/availableBooks",
+    listIssuedBooks: this.issueBookApiUrl + "/all",
     searchBook: this.apiUrl + "/searchBook",
     saveBookUrl: this.apiUrl + "/create",
     updateBookUrl: this.apiUrl + "/updateBook",
@@ -31,7 +32,7 @@ export class BookService {
     //return this.httpClient.get<Book[]>(`${this.baseURL}/availableBooks`);
   }
   listIssuedBooks(): Observable<Book[]> {
-    return this.httpClient.get<Book[]>(this.httpLink.availableBooks);
+    return this.httpClient.get<Book[]>(this.httpLink.listIssuedBooks);
   }
 
   saveBook(addBookForm: Book) {
