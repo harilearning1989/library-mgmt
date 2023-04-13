@@ -5,6 +5,7 @@ import {LoginService} from "../../services/login/login.service";
 import {AlertService} from "../../services/alert/alert.service";
 import {InputValidation} from "../../validations/input-validation";
 import {Utils} from "../../utils/utils";
+import {IssueBookService} from "../../services/issue/issue-book.service";
 @Component({
   selector: 'app-issue-book',
   templateUrl: './issue-book.component.html',
@@ -20,36 +21,33 @@ export class IssueBookComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private loginService: LoginService,
+    private issueBookService: IssueBookService,
     private alertService: AlertService
   ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.minLength(4),
+      studentId: ['', [Validators.required, Validators.minLength(4),
+        Validators.maxLength(10),InputValidation.cannotContainSpace]],
+      studentName: ['', [Validators.required, Validators.minLength(4),
         Validators.maxLength(20),InputValidation.cannotContainSpace]],
-      lastName: ['', [Validators.required, Validators.minLength(4),
+      subject: ['', [Validators.required, Validators.minLength(4),
         Validators.maxLength(20),InputValidation.cannotContainSpace]],
-      email: ['', [Validators.required,Validators.email,
-        Validators.maxLength(20),
-        Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      phone: ['', [Validators.required,
-        Validators.minLength(10), Validators.maxLength(10),
-        InputValidation.cannotContainSpace]],
-      username: ['', [Validators.required, Validators.minLength(4),
+      bookName: ['', [Validators.required, Validators.minLength(4),
         Validators.maxLength(20),InputValidation.cannotContainSpace]],
-      roles: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6),
-        Validators.maxLength(20),InputValidation.cannotContainSpace]]
+      isbn: ['', [Validators.required, Validators.minLength(4),
+        Validators.maxLength(20),InputValidation.cannotContainSpace]],
+      authors: ['', [Validators.required, Validators.minLength(4),
+        Validators.maxLength(20),InputValidation.cannotContainSpace]],
+      price: ['', [Validators.required, Validators.minLength(3),
+        Validators.maxLength(10),InputValidation.cannotContainSpace]],
     });
   }
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
   onSubmit() {
     this.submitted = true;
-    // reset alerts on submit
     this.alertService.clear();
-    // stop here if form is invalid
     if (this.form.invalid) {
       return;
     }
@@ -57,16 +55,15 @@ export class IssueBookComponent implements OnInit {
     console.log(this.form.value);
     this.loading = true;
 
-    this.loginService.register(this.form.value)
+    this.issueBookService.register(this.form.value)
       .subscribe((data : any) => {
           console.log("Success Logged In");
           this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-          this.router.navigate(['../login'], { relativeTo: this.route });
+          //this.router.navigate(['../login'], { relativeTo: this.route });
         },
         (error : any)=> {
           if(error.status == 200){
             this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-            this.router.navigate(['../login'], { relativeTo: this.route });
           }else{
             console.log("Register Failed ::"+error);
             //this.alertService.error(error);
@@ -79,8 +76,8 @@ export class IssueBookComponent implements OnInit {
     return Utils.omitSpecialChars(event);
   }
 
-  omitSpecialCharsNumbers(event: KeyboardEvent) {
-    return Utils.omitSpecialCharsNumbers(event);
+  allowOnlyNumbers(event: KeyboardEvent){
+    return Utils.allowOnlyNumbers(event);
   }
 
 }

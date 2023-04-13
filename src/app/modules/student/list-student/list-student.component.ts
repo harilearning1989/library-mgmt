@@ -20,7 +20,7 @@ export class ListStudentComponent implements OnInit,OnDestroy{
     this.dtOptions = {
       destroy: true,
       ordering: true,
-      scrollY: '500px',
+      scrollY: '450px',
       pagingType: 'full_numbers',
       pageLength: 25,
       processing: true,
