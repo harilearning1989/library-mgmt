@@ -219,23 +219,6 @@
                       </div>
                     </div>
                   </td>
-                  <td>
-                    <div class="form-group">
-                      <label for="categories">Categories</label>
-                      <input type="text" class="form-control" name="categories" id="categories"
-                             [(ngModel)]="form.categories" required minlength="3"
-                             maxlength="20" #categories="ngModel"/>
-                      <div class="alert alert-danger validationError" *ngIf="categories.errors && f.submitted">
-                        <div *ngIf="categories.errors.required">Categories is required</div>
-                        <div *ngIf="categories.errors.minlength">
-                          Categories must be at least 3 characters
-                        </div>
-                        <div *ngIf="categories.errors.maxlength">
-                          Categories must be at most 20 characters
-                        </div>
-                      </div>
-                    </div>
-                  </td>
                 </tr>
                 <tr>
                   <td>

@@ -7,7 +7,7 @@
       <th>ISBN</th>
       <th>Subject</th>
       <th>Authors</th>
-      <th>Price,Count</th>
+      <th>Price</th>
       <th>PublishDate</th>
       <th>Action</th>
     </tr>
@@ -20,7 +20,7 @@
       <td>
         <span>{{ book.authors | slice: 0:limit }}</span>
       </td>
-      <td>{{ book.price }}, {{ book.pageCount }}</td>
+      <td>{{ book.price }}</td>
       <td>{{ book.publishedDate }}</td>
       <td>
         <button style="background-color: cornflowerblue" (click)="returnBook(book.id)">Return</button>

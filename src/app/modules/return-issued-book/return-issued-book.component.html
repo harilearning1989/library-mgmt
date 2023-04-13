@@ -8,7 +8,7 @@
       <th>Qty</th>
       <th>Authors</th>
       <th>Avail Books</th>
-      <th>Price,Count</th>
+      <th>Price</th>
       <th>PublishDate</th>
     </tr>
     </thead>
@@ -21,7 +21,7 @@
         <span>{{ book.authors | slice: 0:limit }}</span>
       </td>
       <td>{{ book.availBooks }}</td>
-      <td>{{ book.price }}, {{ book.pageCount }}</td>
+      <td>{{ book.price }}</td>
       <td>{{ book.publishedDate }}</td>
     </tr>
     </tbody>
