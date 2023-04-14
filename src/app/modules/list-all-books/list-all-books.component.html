@@ -2,7 +2,8 @@
   <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead>
     <tr>
-      <th>ID</th>
+      <th>ISBN</th>
+      <th>Book Name</th>
       <th>Subject</th>
       <th>Qty</th>
       <th>Authors</th>
@@ -13,7 +14,8 @@
     </thead>
     <tbody>
     <tr *ngFor="let book of this.allBooks">
-      <td>{{ book.id }}</td>
+      <td>{{ book.isbn }}</td>
+      <td>{{ book.bookName }}</td>
       <td>{{ book.subject }}</td>
       <td>{{ book.bookQty }}</td>
       <td>

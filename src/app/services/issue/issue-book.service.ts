@@ -12,7 +12,7 @@ export class IssueBookService {
   private apiUrl: string = "http://localhost:8081/issue";
 
   private httpLink = {
-    issueNewBook: this.apiUrl + "/issueBook",
+    issueNewBook: this.apiUrl + "/issueNewBook",
   }
   constructor(private httpClient: HttpClient) { }
 
