@@ -3,27 +3,27 @@
   <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
     <thead>
     <tr>
-      <th>ID</th>
       <th>ISBN</th>
       <th>Subject</th>
+      <th>Book Name</th>
+      <th>Student</th>
       <th>Authors</th>
       <th>Price</th>
-      <th>PublishDate</th>
       <th>Action</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let book of this.issuedBooks">
-      <td>{{ book.id }}</td>
       <td>{{ book.isbn }}</td>
       <td>{{ book.subject }}</td>
+      <td>{{ book.bookName }}</td>
+      <td>{{ book.studentName }}</td>
       <td>
         <span>{{ book.authors | slice: 0:limit }}</span>
       </td>
       <td>{{ book.price }}</td>
-      <td>{{ book.publishedDate }}</td>
       <td>
-        <button style="background-color: cornflowerblue" (click)="returnBook(book.id)">Return</button>
+        <button style="background-color: cornflowerblue" (click)="returnBook(book)">Return</button>
       </td>
     </tr>
     </tbody>

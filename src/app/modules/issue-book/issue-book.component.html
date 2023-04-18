@@ -8,7 +8,7 @@
           <label class="form-label">StudentId</label>
           <input type="text" formControlName="studentId" class="form-control"
                  placeholder="Enter Student Id"
-                 (keypress)="omitSpecialChars($event)"
+                 (keypress)="allowOnlyNumbers($event)"
                  [ngClass]="{ 'is-invalid': submitted && f.studentId.errors }" />
           <div *ngIf="submitted && f.studentId.errors" class="invalid-feedback">
             <div *ngIf="f.studentId.errors.required">Student Id is required</div>
@@ -20,7 +20,7 @@
           <label class="form-label">ISBN</label>
           <input type="text" formControlName="isbn" class="form-control"
                  placeholder="Enter ISBN"
-                 (keypress)="omitSpecialChars($event)"
+                 (keypress)="allowOnlyNumbers($event)"
                  [ngClass]="{ 'is-invalid': submitted && f.isbn.errors }" />
           <div *ngIf="submitted && f.isbn.errors" class="invalid-feedback">
             <div *ngIf="f.isbn.errors.required">ISBN is required</div>
@@ -83,7 +83,7 @@
       </div>
 
       <div class="mb-3">
-        <label class="form-label">price</label>
+        <label class="form-label">Price</label>
         <input type="text" formControlName="price" class="form-control"
                placeholder="Enter Price only numbers"
                (keypress)="allowOnlyNumbers($event)"

@@ -1,1 +1,124 @@
-<p>add-book works!</p>
+<div class="card registerDiv">
+  <h4 class="card-header">Add New Book</h4>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Book Name</label>
+        <input type="text" formControlName="bookName" class="form-control"
+               placeholder="Enter Book Name"
+               (keypress)="omitSpecialChars($event)"
+               [ngClass]="{ 'is-invalid': submitted && f.bookName.errors }"/>
+        <div *ngIf="submitted && f.bookName.errors" class="invalid-feedback">
+          <div *ngIf="f.bookName.errors.required">Book Name is required</div>
+          <div *ngIf="f.bookName.errors.cannotContainSpace">Book Name cannot contain spaces</div>
+          <div *ngIf="f.bookName.errors.minlength">Book Name must be at least 4 characters</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Subject</label>
+        <input type="text" formControlName="subject" class="form-control"
+               placeholder="Enter Subject"
+               (keypress)="omitSpecialChars($event)"
+               [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"/>
+        <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
+          <div *ngIf="f.subject.errors.required">Subject is required</div>
+          <div *ngIf="f.subject.errors.cannotContainSpace">Subject cannot contain spaces</div>
+          <div *ngIf="f.subject.errors.minlength">Subject must be at least 4 characters</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">ISBN</label>
+            <input type="text" formControlName="isbn" class="form-control"
+                   placeholder="Enter ISBN only numbers"
+                   (keypress)="allowOnlyNumbers($event)"
+                   [ngClass]="{ 'is-invalid': submitted && f.isbn.errors }"/>
+            <div *ngIf="submitted && f.isbn.errors" class="invalid-feedback">
+              <div *ngIf="f.isbn.errors.required">ISBN is required</div>
+              <div *ngIf="f.isbn.errors.cannotContainSpace">ISBN cannot contain spaces</div>
+              <div *ngIf="f.isbn.errors.minlength">ISBN must be at least 4 characters</div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="text" formControlName="price" class="form-control"
+                   placeholder="Enter Price only numbers"
+                   (keypress)="allowOnlyNumbers($event)"
+                   [ngClass]="{ 'is-invalid': submitted && f.price.errors }"/>
+            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+              <div *ngIf="f.price.errors.required">Price is required</div>
+              <div *ngIf="f.price.errors.cannotContainSpace">Price cannot contain spaces</div>
+              <div *ngIf="f.price.errors.minlength">Price must be at least 4 characters</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Book Quantity</label>
+            <input type="text" formControlName="bookQty" class="form-control"
+                   placeholder="Enter BookQty only numbers"
+                   (keypress)="allowOnlyNumbers($event)"
+                   [ngClass]="{ 'is-invalid': submitted && f.bookQty.errors }"/>
+            <div *ngIf="submitted && f.bookQty.errors" class="invalid-feedback">
+              <div *ngIf="f.bookQty.errors.required">BookQty is required</div>
+              <div *ngIf="f.bookQty.errors.cannotContainSpace">BookQty cannot contain spaces</div>
+              <div *ngIf="f.bookQty.errors.minlength">BookQty must be at least 4 characters</div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <label class="form-label">Available Books</label>
+            <input type="text" formControlName="availBooks" class="form-control"
+                   placeholder="Enter Avail Books only numbers"
+                   (keypress)="allowOnlyNumbers($event)"
+                   [ngClass]="{ 'is-invalid': submitted && f.availBooks.errors }"/>
+            <div *ngIf="submitted && f.availBooks.errors" class="invalid-feedback">
+              <div *ngIf="f.availBooks.errors.required">Avail Books is required</div>
+              <div *ngIf="f.availBooks.errors.cannotContainSpace">Avail Books cannot contain spaces</div>
+              <div *ngIf="f.availBooks.errors.minlength">Avail Books must be at least 4 characters</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Short Description</label>
+        <input type="text" formControlName="shortDescription" class="form-control"
+               placeholder="Enter Short Description"
+               (keypress)="omitSpecialChars($event)"
+               [ngClass]="{ 'is-invalid': submitted && f.shortDescription.errors }"/>
+        <div *ngIf="submitted && f.shortDescription.errors" class="invalid-feedback">
+          <div *ngIf="f.shortDescription.errors.required">Short Description is required</div>
+          <div *ngIf="f.shortDescription.errors.cannotContainSpace">Short Description cannot contain spaces</div>
+          <div *ngIf="f.shortDescription.errors.minlength">Short Description must be at least 4 characters</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Long Description</label>
+        <input type="text" formControlName="longDescription" class="form-control"
+               placeholder="Enter Long Description"
+               (keypress)="omitSpecialChars($event)"
+               [ngClass]="{ 'is-invalid': submitted && f.longDescription.errors }"/>
+        <div *ngIf="submitted && f.longDescription.errors" class="invalid-feedback">
+          <div *ngIf="f.longDescription.errors.required">Long Description is required</div>
+          <div *ngIf="f.longDescription.errors.cannotContainSpace">Long Description cannot contain spaces</div>
+          <div *ngIf="f.longDescription.errors.minlength">Long Description must be at least 4 characters</div>
+        </div>
+      </div>
+
+      <div>
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

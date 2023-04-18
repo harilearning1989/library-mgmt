@@ -1,1 +1,28 @@
-<p>update-student works!</p>
+<div class="container">
+  <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Father Name</th>
+      <th>Gender</th>
+      <th>Category</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let student of this.allStudents">
+      <td>{{ student.studentId }}</td>
+      <td>{{ student.studentName }}</td>
+      <td>{{ student.email }}</td>
+      <td>{{ student.fatherName }}</td>
+      <td>{{ student.gender }}</td>
+      <td>{{ student.category }}</td>
+      <td>
+        <button class="btn-primary" (click)="modifyStudent(student)">Modify</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

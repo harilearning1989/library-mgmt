@@ -1,1 +1,31 @@
-<p>update-book works!</p>
+<div class="container">
+  <table class="table table-striped" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+    <thead>
+    <tr>
+      <th>ISBN</th>
+      <th>Book Name</th>
+      <th>Subject</th>
+      <th>Qty</th>
+      <th>Authors</th>
+      <th>Avail Books</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of this.allBooks">
+      <td>{{ book.isbn }}</td>
+      <td data-container="body" data-toggle="tooltip" data-placement = "bottom" title="{{book.bookName}}">
+        {{ (book.bookName.length>10)? (book.bookName | slice:0:10)+'...':(book.bookName) }}</td>
+      <td>{{ book.subject }}</td>
+      <td>{{ book.bookQty }}</td>
+      <td>
+        <span>{{ book.authors | slice: 0:limit }}</span>
+      </td>
+      <td>{{ book.availBooks }}</td>
+      <td>
+        <button (click)="modifyBook(book)">Modify</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

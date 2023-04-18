@@ -2,6 +2,8 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Book} from "../../models/books/book";
 import {Subject} from "rxjs";
 import {BookService} from "../../services/book/book.service";
+import {IssueBook} from "../../models/issue/issue-book";
+import {IssueBookService} from "../../services/issue/issue-book.service";
 @Component({
   selector: 'app-list-issued-books',
   templateUrl: './list-issued-books.component.html',
@@ -9,7 +11,7 @@ import {BookService} from "../../services/book/book.service";
 })
 export class ListIssuedBooksComponent implements OnInit,OnDestroy{
 
-  issuedBooks: Book[];
+  issuedBooks: IssueBook[];
   dtOptions: DataTables.Settings = {};
   @Input() limit: number = 20;
   dtTrigger: Subject<any> = new Subject<any>();
@@ -54,9 +56,9 @@ export class ListIssuedBooksComponent implements OnInit,OnDestroy{
     this.dtTrigger.unsubscribe();
   }
 
-  returnBook(id: number) {
+  returnBook(book: IssueBook) {
     if(window.confirm('Are sure you want to return this item ?')){
-      alert(id);
+      alert(book.id);
     }
 
     /*let text = "Press a button!Either OK or Cancel.";

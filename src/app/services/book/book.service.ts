@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Book} from "../../models/books/book";
+import {IssueBook} from "../../models/issue/issue-book";
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class BookService {
     return this.httpClient.get<Book[]>(this.httpLink.availableBooks);
     //return this.httpClient.get<Book[]>(`${this.baseURL}/availableBooks`);
   }
-  listIssuedBooks(): Observable<Book[]> {
-    return this.httpClient.get<Book[]>(this.httpLink.listIssuedBooks);
+  listIssuedBooks(): Observable<IssueBook[]> {
+    return this.httpClient.get<IssueBook[]>(this.httpLink.listIssuedBooks);
   }
 
   saveBook(addBookForm: Book) {
