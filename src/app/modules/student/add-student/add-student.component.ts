@@ -18,6 +18,7 @@ export class AddStudentComponent implements OnInit {
   loading = false;
   submitted = false;
   selectedRoles: string[] = [];
+  errorMessage: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -53,6 +54,7 @@ export class AddStudentComponent implements OnInit {
   }
 
   onSubmit() {
+    this.errorMessage = '';
     this.submitted = true;
     this.alertService.clear();
     if (this.form.invalid) {
@@ -73,6 +75,7 @@ export class AddStudentComponent implements OnInit {
             this.alertService.success('Added New Student successful', {keepAfterRouteChange: true});
           } else {
             console.log("Register Failed ::" + error);
+            this.errorMessage = error.status+' '+error.error.message;
             //this.alertService.error(error);
             this.loading = false;
           }
@@ -87,4 +90,7 @@ export class AddStudentComponent implements OnInit {
     return Utils.allowOnlyNumbers(event);
   }
 
+  omitSpaces(event: KeyboardEvent) {
+    return Utils.omitSpaces(event);
+  }
 }

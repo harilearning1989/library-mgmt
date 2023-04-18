@@ -40,4 +40,11 @@ export class Utils {
     event.preventDefault();
     return false;
   }
+
+  static omitSpaces(event: KeyboardEvent) {
+    if (event.which === 32){
+      return false;
+    }
+    return true;
+  }
 }
