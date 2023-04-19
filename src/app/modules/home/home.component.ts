@@ -10,6 +10,7 @@ import {LoginService} from "../../services/login/login.service";
 export class HomeComponent implements OnInit{
   public data: any;
   userName: any;
+  user_role: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -17,11 +18,14 @@ export class HomeComponent implements OnInit{
     private loginService:LoginService
   ) {}
   ngOnInit() {
+    const user = this.loginService.userValue;
+    this.user_role = user && user.roles && user.roles[0];
+    console.log('this.user_role::'+this.user_role);
     this.route
       .data
       .subscribe(v => console.log(v));
     this.data = this.route.snapshot.data;
-    const user = this.loginService.userValue;
+
     const isLoggedIn = user && user.token;
     if (isLoggedIn) {
       this.userName = user.username;

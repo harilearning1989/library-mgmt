@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'returnBook',loadChildren: returnIssuedBookModule},
       { path: 'issuedBook',loadChildren: listIssuedBooksModule},
       { path: 'contact',loadChildren: contactModule},
-      { path: 'manageStudent',loadChildren: studentModule},
+      { path: 'manageStudent',loadChildren: studentModule, },
       { path: 'book', loadChildren: bookModule},
       { path: 'issueBook', loadChildren: issueBookModule},
       { path: '', loadChildren: aboutModule},

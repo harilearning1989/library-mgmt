@@ -7,8 +7,8 @@
     <div class="col-xs-12">
       <nav>
         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-         <!-- <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
-                routerLink="/" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>-->
+          <!-- <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab"
+                 routerLink="/" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>-->
           <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab"
              routerLink="./about" role="tab" aria-controls="nav-about" aria-selected="false">Home</a>
           <a class="nav-item nav-link" id="nav-list-all-books-tab" data-toggle="tab"
@@ -19,22 +19,31 @@
              aria-selected="false">Avail Books</a>
           <a class="nav-item nav-link" id="nav-issued-book-tab" data-toggle="tab"
              routerLink="./issuedBook" role="tab" aria-controls="nav-return-book" aria-selected="false">Issued Books</a>
-          <a class="nav-item nav-link" id="nav-issue-book-tab" data-toggle="tab"
-             routerLink="./issueBook" role="tab" aria-controls="nav-return-book" aria-selected="false">Issue New Book</a>
-          <a class="nav-item nav-link" id="nav-book-tab" data-toggle="tab"
-             routerLink="./book" role="tab" aria-controls="nav-return-book" aria-selected="false">Book</a>
+          <div *ngIf="user_role == 'ROLE_ADMIN'">
+            <a class="nav-item nav-link" id="nav-issue-book-tab" data-toggle="tab"
+               routerLink="./issueBook" role="tab" aria-controls="nav-return-book" aria-selected="false">Issue New
+              Book</a>
+          </div>
+          <div *ngIf="user_role == 'ROLE_ADMIN'">
+            <a class="nav-item nav-link" id="nav-book-tab" data-toggle="tab"
+               routerLink="./book" role="tab" aria-controls="nav-return-book" aria-selected="false">Book</a>
+          </div>
           <!--<a class="nav-item nav-link" id="nav-add-book-tab" data-toggle="tab"
              routerLink="./addBook" role="tab" aria-controls="nav-add-book" aria-selected="false">Add Book</a>
           <a class="nav-item nav-link" id="nav-update-book-tab" data-toggle="tab"
              routerLink="./updateBook" role="tab" aria-controls="nav-update-book" aria-selected="false">Update Book</a>-->
-          <a class="nav-item nav-link" id="nav-student-tab" data-toggle="tab"
-             routerLink="./manageStudent" role="tab" aria-controls="nav-return-book" aria-selected="false">Student</a>
+
+          <div *ngIf="user_role == 'ROLE_ADMIN'">
+            <a class="nav-item nav-link" id="nav-student-tab" data-toggle="tab"
+               routerLink="./manageStudent" role="tab" aria-controls="nav-return-book" aria-selected="false">Student</a>
+          </div>
           <!--<a class="nav-item nav-link" id="nav-return-book-tab" data-toggle="tab"
              routerLink="./returnBook" role="tab" aria-controls="nav-return-book" aria-selected="false">Return Book</a>-->
           <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
              routerLink="./contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
           <div>&nbsp;&nbsp;<span class="text-bg-danger">{{userName}}</span><br/>
-            <button class="btn-primary" (click)="logout()">Logout</button></div>
+            <button class="btn-primary" (click)="logout()">Logout</button>
+          </div>
         </div>
       </nav>
       <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
