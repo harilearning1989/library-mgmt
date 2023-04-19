@@ -72,6 +72,7 @@ export class AddStudentComponent implements OnInit {
           console.log("Success Logged In");
           this.errorMessage = 'Added New Student successful';
           this.alertService.success('Added New Student successful', {keepAfterRouteChange: true});
+          this.loading = false;
           //this.router.navigate(['../update'], { relativeTo: this.route });
         },
         (error: any) => {

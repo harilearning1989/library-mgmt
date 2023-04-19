@@ -5,9 +5,9 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpHeaders,
-  HttpErrorResponse
+  HttpErrorResponse, HttpResponse
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import {Observable, tap, throwError} from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {LoginService} from "../services/login/login.service";
 import {environment} from "../../environments/environment";

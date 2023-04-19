@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Student} from "../../../models/student/student";
 import {Subject} from "rxjs";
 import {StudentService} from "../../../services/student/student.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-update-student',
@@ -12,7 +13,10 @@ export class UpdateStudentComponent implements OnInit,OnDestroy{
   allStudents: Student[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-  constructor(private studentService: StudentService) { }
+  constructor(
+    private studentService: StudentService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -52,5 +56,15 @@ export class UpdateStudentComponent implements OnInit,OnDestroy{
 
   modifyStudent(student: Student) {
 
+  }
+
+  deleteStudentById(student: Student) {
+    this.studentService.deleteStudentById(student.studentId)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.router.navigate(['../manageStudent'], { relativeTo: this.route });
+        },
+        error => console.log(error));
   }
 }
