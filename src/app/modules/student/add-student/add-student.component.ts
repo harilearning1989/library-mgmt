@@ -30,6 +30,10 @@ export class AddStudentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.formFields();
+  }
+
+  formFields() {
     this.form = this.formBuilder.group({
       studentId: ['', [Validators.required, Validators.minLength(4),
         Validators.maxLength(20), InputValidation.cannotContainSpace]],
@@ -39,8 +43,7 @@ export class AddStudentComponent implements OnInit {
         Validators.maxLength(100)]],
       fatherName: ['', [Validators.required, Validators.minLength(4),
         Validators.maxLength(100)]],
-      gender: ['', [Validators.required, Validators.minLength(2),
-        Validators.maxLength(6)]],
+      gender: ['', Validators.required],
       mobile: ['', [Validators.required, Validators.minLength(10),
         Validators.maxLength(10), InputValidation.cannotContainSpace]],
       category: ['', [Validators.required, Validators.minLength(2),
@@ -67,8 +70,9 @@ export class AddStudentComponent implements OnInit {
     this.studentService.saveStudent(this.form.value)
       .subscribe((data: any) => {
           console.log("Success Logged In");
+          this.errorMessage = 'Added New Student successful';
           this.alertService.success('Added New Student successful', {keepAfterRouteChange: true});
-          this.router.navigate(['../update'], { relativeTo: this.route });
+          //this.router.navigate(['../update'], { relativeTo: this.route });
         },
         (error: any) => {
           if (error.status == 200) {
@@ -92,5 +96,9 @@ export class AddStudentComponent implements OnInit {
 
   omitSpaces(event: KeyboardEvent) {
     return Utils.omitSpaces(event);
+  }
+
+  clearFields() {
+    this.formFields();
   }
 }

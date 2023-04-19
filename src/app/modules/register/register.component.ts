@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit {
   user_roles: any = [
     {name:'Admin', value:'ROLE_ADMIN', selected: false},
     {name:'Student', value:'ROLE_STUDENT', selected: false}
-  ]
+  ];
 
   onChangeCategory(event: any, role: any) {
     this.selectedRoles.push(role.value);

@@ -73,38 +73,39 @@
         </div>
         <div class="col">
           <div class="mb-3">
-            <label class="form-label">Gender</label>
-            <input type="text" formControlName="gender" class="form-control"
-                   placeholder="Enter Gender"
+            <label class="form-label">Category</label>
+            <input type="text" formControlName="category" class="form-control"
+                   placeholder="Enter Category"
                    (keypress)="omitSpecialChars($event)"
-                   [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"/>
-            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
-              <div *ngIf="f.gender.errors.required">Gender is required</div>
-              <div *ngIf="f.gender.errors.cannotContainSpace">Gender cannot contain spaces</div>
-              <div *ngIf="f.gender.errors.minlength">Gender must be at least 4 characters</div>
+                   [ngClass]="{ 'is-invalid': submitted && f.category.errors }"/>
+            <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
+              <div *ngIf="f.category.errors.required">Category is required</div>
+              <div *ngIf="f.category.errors.cannotContainSpace">Category cannot contain spaces</div>
+              <div *ngIf="f.category.errors.minlength">Category must be at least 2 characters</div>
             </div>
           </div>
         </div>
       </div>
       <div class="mb-3">
-        <label class="form-label">Category</label>
-        <input type="text" formControlName="category" class="form-control"
-               placeholder="Enter Category"
-               (keypress)="omitSpecialChars($event)"
-               [ngClass]="{ 'is-invalid': submitted && f.category.errors }"/>
-        <div *ngIf="submitted && f.category.errors" class="invalid-feedback">
-          <div *ngIf="f.category.errors.required">Category is required</div>
-          <div *ngIf="f.category.errors.cannotContainSpace">Category cannot contain spaces</div>
-          <div *ngIf="f.category.errors.minlength">Category must be at least 2 characters</div>
-        </div>
+        <label class="form-label">Gender:</label>&nbsp;
+        <label>
+          <input type="radio" value="Male" formControlName="gender">&nbsp;
+          <span class="text-primary">Male</span>&nbsp;&nbsp;&nbsp;
+        </label>
+        <label>
+          <input type="radio" value="Female" formControlName="gender">&nbsp;
+          <span class="text-primary">Female</span>
+        </label>
       </div>
 
-      <div>
-        <button [disabled]="loading" class="btn btn-primary">
+      <div style="padding-left: 400px">
+        <button [disabled]="loading" class="btn btn-primary" >
           <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
           Submit
         </button>
-        <span class="text-danger">{{errorMessage}}</span>
+        &nbsp;
+        <button class="btn btn-primary" (click)="clearFields()">Clear</button>
+        <span class="text-danger" style="padding-left: 90px">{{errorMessage}}</span>
       </div>
     </form>
   </div>
