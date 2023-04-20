@@ -1,4 +1,6 @@
-.ng-valid[required], .ng-valid.required {border: 1px solid #42A948;}
-.error {color:#ff0000;}
-.success { color:green; }
-.contact-message { text-align: center; }
+.registerDiv{
+  width: 550px;
+  margin-top: 5px;
+  margin-left: 350px;
+  border: solid 2px #bce4f7;
+}
