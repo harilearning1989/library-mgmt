@@ -64,8 +64,8 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  omitSpecialCharsNumbers(event: KeyboardEvent) {
-    return Utils.omitSpecialCharsNumbers(event);
+  omitSpecialCharsAndNumbers(event: KeyboardEvent) {
+    return Utils.omitSpecialCharsAndNumbers(event);
   }
 
   omitSpecialChars(event: KeyboardEvent) {

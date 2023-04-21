@@ -3,18 +3,17 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError} from "rxjs/operators";
 import {throwError} from "rxjs";
 import {Contact} from "../../models/contact/contact";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
 
-  ServerUrl = 'http://localhost/dev/blogger/';
+  private httpLink = {
+    contactSaveUrl: environment.apiUrl + 'contact/save'
+  }
   errorData: {};
-
-  httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
 
   constructor(private http: HttpClient) { }
 
@@ -25,10 +24,14 @@ export class ContactService {
       );
   }*/
 
-  contactForm(formdata: Contact) {
+  /*contactForm(formdata: Contact) {
     return this.http.post<Contact>(this.ServerUrl + 'api/contact', formdata, this.httpOptions).pipe(
       catchError(this.handleError)
     );
+  }*/
+
+  contactForm(formData: Contact) {
+    return this.http.post(this.httpLink.contactSaveUrl, formData);
   }
 
   private handleError(error: HttpErrorResponse) {

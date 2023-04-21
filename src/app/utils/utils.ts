@@ -14,7 +14,7 @@ export class Utils {
   }
 
 
-  static omitSpecialCharsNumbers(event: KeyboardEvent) {
+  static omitSpecialCharsAndNumbers(event: KeyboardEvent) {
     //let regex = new RegExp("^[a-zA-Z0-9 ]+$");
     let regex = new RegExp("^[a-zA-Z ]+$");
     let str = String.fromCharCode(!event.charCode ? event.which : event.charCode);

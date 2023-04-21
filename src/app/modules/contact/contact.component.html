@@ -6,7 +6,7 @@
         <label class="form-label">Name</label>
         <input type="text" formControlName="name" class="form-control"
                placeholder="Enter Name"
-               (keypress)="omitSpecialChars($event)"
+               (keypress)="omitSpecialCharsAndNumbers($event)"
                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
         <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
           <div *ngIf="f.name.errors.required">Name is required</div>
@@ -60,7 +60,9 @@
         <button [disabled]="loading" class="btn btn-primary">
           <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
           Submit
-        </button>
+        </button>&nbsp;&nbsp;
+        <button class="btn btn-primary" (click)="clearFields()">Clear</button>
+        <span class="text-danger" style="padding-left: 50px">{{errorMessage}}</span>
       </div>
     </form>
   </div>

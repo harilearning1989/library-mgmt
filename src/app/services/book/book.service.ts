@@ -3,26 +3,23 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Book} from "../../models/books/book";
 import {IssueBook} from "../../models/issue/issue-book";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookService {
-  private apiUrl: string = "http://localhost:8081/book";
-  private issueBookApiUrl: string = "http://localhost:8081/issue";
-
   private httpLink = {
-    listAllBooks: this.apiUrl + "/all",
-    availableBooks: this.apiUrl + "/availableBooks",
-    listIssuedBooks: this.issueBookApiUrl + "/all",
-    searchBook: this.apiUrl + "/searchBook",
-    saveBookUrl: this.apiUrl + "/create",
-    updateBookUrl: this.apiUrl + "/updateBook",
-    deleteBookById: this.apiUrl + "/delete"
+    listAllBooks: environment.apiUrl + 'book/all',
+    availableBooks: environment.apiUrl + 'book/availableBooks',
+    listIssuedBooks: environment.apiUrl + 'issue/all',
+    searchBook: environment.apiUrl + 'book/searchBook',
+    saveBookUrl: environment.apiUrl + 'book/create',
+    updateBookUrl: environment.apiUrl + 'book/updateBook',
+    deleteBookById: environment.apiUrl + 'book/delete'
   }
 
-  constructor(private httpClient: HttpClient) {
-  }
+  constructor(private httpClient: HttpClient) {}
 
   listAllBooks(): Observable<Book[]> {
     return this.httpClient.get<Book[]>(this.httpLink.listAllBooks);

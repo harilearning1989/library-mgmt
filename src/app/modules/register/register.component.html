@@ -52,7 +52,7 @@
         <label class="form-label">Username</label>
         <input type="text" formControlName="username" class="form-control"
                placeholder="Enter User Name"
-               (keypress)="omitSpecialCharsNumbers($event)"
+               (keypress)="omitSpecialCharsAndNumbers($event)"
                [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
         <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
           <div *ngIf="f.username.errors.required">Username is required</div>

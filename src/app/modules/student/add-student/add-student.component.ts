@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BookService} from "../../../services/book/book.service";
@@ -71,19 +71,16 @@ export class AddStudentComponent implements OnInit {
       .subscribe((data: any) => {
           console.log("Success Logged In");
           this.errorMessage = 'Added New Student successful';
-          this.alertService.success('Added New Student successful', {keepAfterRouteChange: true});
           this.loading = false;
+          this.submitted = false;
+          this.formFields();
           //this.router.navigate(['../update'], { relativeTo: this.route });
         },
         (error: any) => {
-          if (error.status == 200) {
-            this.alertService.success('Added New Student successful', {keepAfterRouteChange: true});
-          } else {
-            console.log("Register Failed ::" + error);
-            this.errorMessage = error.status+' '+error.error.message;
-            //this.alertService.error(error);
-            this.loading = false;
-          }
+          console.log("Register Failed ::" + error);
+          this.errorMessage = error.status + ' ' + error.error.message;
+          //this.alertService.error(error);
+          this.loading = false;
         });
   }
 
