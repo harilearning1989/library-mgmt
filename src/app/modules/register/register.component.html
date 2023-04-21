@@ -78,7 +78,6 @@
         <div *ngFor="let role of user_roles">
           <input formControlName="roles" name="{{ role.name }}" type="checkbox" id="{{role.name}}"
                  (change)="onChangeCategory($event, role)">
-          &nbsp;
           <label class="form-check-label" for="{{role.name}}">
             {{role.name}}
           </label>
@@ -89,7 +88,8 @@
           <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
           Register
         </button>
-        <a routerLink="../login" class="btn btn-link">Cancel</a>
+        <a routerLink="../login" class="btn btn-link">Cancel</a>&nbsp;&nbsp;
+        <span class="text-danger" style="padding-left: 10px">{{errorMessage}}</span>
       </div>
     </form>
   </div>

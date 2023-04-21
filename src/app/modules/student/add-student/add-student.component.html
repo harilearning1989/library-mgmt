@@ -102,9 +102,9 @@
         <button [disabled]="loading" class="btn btn-primary" >
           <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
           Submit
-        </button>
+        </button>&nbsp;&nbsp;
         <button class="btn btn-primary" (click)="clearFields()">Clear</button>
-        <span class="text-danger" style="padding-left: 90px">{{errorMessage}}</span>
+        <span class="text-danger" style="padding-left: 20px">{{errorMessage}}</span>
       </div>
     </form>
   </div>

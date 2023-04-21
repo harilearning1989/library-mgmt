@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {catchError} from "rxjs/operators";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {throwError} from "rxjs";
 import {Contact} from "../../models/contact/contact";
 import {environment} from "../../../environments/environment";

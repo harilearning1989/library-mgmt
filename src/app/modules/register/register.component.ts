@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LoginService} from "../../services/login/login.service";
-import {AlertService} from "../../services/alert/alert.service";
 import {InputValidation} from "../../validations/input-validation";
 import {Utils} from "../../utils/utils";
 
@@ -22,8 +21,7 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private loginService: LoginService,
-    private alertService: AlertService
+    private loginService: LoginService
   ) {
   }
 
@@ -39,7 +37,6 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     // reset alerts on submit
-    this.alertService.clear();
     // stop here if form is invalid
     if (this.form.invalid) {
       return;
@@ -64,15 +61,15 @@ export class RegisterComponent implements OnInit {
     this.loginService.register(this.form.value)
       .subscribe((data: any) => {
           console.log("Submitted Successfully");
-          this.errorMessage = 'Added Successful';
+          this.errorMessage = data.status +' '+ data.message;
           this.loading = false;
           this.submitted = false;
           this.formFields();
-          this.router.navigate(['../login'], {relativeTo: this.route});
+          //this.router.navigate(['../login'], {relativeTo: this.route});
         },
         (error: any) => {
           console.log("Submission Failed ::" + error);
-          this.errorMessage = error.status+' '+error.error.message;
+          this.errorMessage = error;
           this.loading = false;
         });
   }
@@ -113,4 +110,5 @@ export class RegisterComponent implements OnInit {
         Validators.maxLength(20), InputValidation.cannotContainSpace]]
     });
   }
+
 }

@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {first} from "rxjs";
 import {LoginService} from "../../services/login/login.service";
-import {AlertService} from "../../services/alert/alert.service";
 import {InputValidation} from "../../validations/input-validation";
 import {Utils} from "../../utils/utils";
 
@@ -16,23 +15,18 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   loading = false;
   submitted = false;
+  errorMessage: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private loginService: LoginService,
-    private alertService: AlertService
+    private loginService: LoginService
   ) {
   }
 
   ngOnInit() {
-    this.form = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(4),
-        InputValidation.cannotContainSpace]],
-      password: ['', [Validators.required, Validators.minLength(4),
-        InputValidation.cannotContainSpace]]
-    });
+    this.formFields();
   }
 
   // convenience getter for easy access to form fields
@@ -42,7 +36,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    this.alertService.clear();
     if (this.form.invalid) {
       return;
     }
@@ -57,8 +50,8 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/home');
         },
         error: error => {
-          console.log("Error::" + error);
-          this.alertService.error(error);
+          console.log("Submission Failed ::" + error);
+          this.errorMessage = error;
           this.loading = false;
         }
       });
@@ -69,6 +62,15 @@ export class LoginComponent implements OnInit {
   }
 
   omitSpecialChars(event: KeyboardEvent) {
-   return Utils.omitSpecialChars(event);
+    return Utils.omitSpecialChars(event);
+  }
+
+  private formFields() {
+    this.form = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.minLength(4),
+        InputValidation.cannotContainSpace]],
+      password: ['', [Validators.required, Validators.minLength(4),
+        InputValidation.cannotContainSpace]]
+    });
   }
 }

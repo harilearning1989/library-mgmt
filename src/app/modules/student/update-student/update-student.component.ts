@@ -9,14 +9,16 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './update-student.component.html',
   styleUrls: ['./update-student.component.scss']
 })
-export class UpdateStudentComponent implements OnInit,OnDestroy{
+export class UpdateStudentComponent implements OnInit, OnDestroy {
   allStudents: Student[];
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+
   constructor(
     private studentService: StudentService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+  }
 
   ngOnInit(): void {
     this.dtOptions = {
@@ -34,22 +36,23 @@ export class UpdateStudentComponent implements OnInit,OnDestroy{
   }
 
   async listAllStudents() {
-    this.studentService.listAllStudents().subscribe((data : any) => {
+    this.studentService.listAllStudents().subscribe((data: any) => {
         if (data != null) {
           this.allStudents = data;
           this.dtTrigger.next(null);
         }
       },
-      (error : any)=> {
+      (error: any) => {
         if (error) {
           if (error.status == 404) {
-            if(error.error && error.error.message){
+            if (error.error && error.error.message) {
               this.allStudents = [];
             }
           }
         }
       });
   }
+
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
@@ -63,7 +66,7 @@ export class UpdateStudentComponent implements OnInit,OnDestroy{
       .subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['../manageStudent'], { relativeTo: this.route });
+          this.router.navigate(['../update'], {relativeTo: this.route});
         },
         error => console.log(error));
   }

@@ -67,7 +67,7 @@ export class AddBookComponent {
       },
       err => {
         console.log("Create Failed::"+err);
-        this.errorMessage = err.message;
+        this.errorMessage = err;
         this.isSignUpFailed = true;
       }
     );

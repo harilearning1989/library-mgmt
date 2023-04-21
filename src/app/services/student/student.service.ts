@@ -1,20 +1,18 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Student} from "../../models/student/student";
-import {Book} from "../../models/books/book";
 import {LibraryResponse} from "../../models/response/library-response";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
-  private apiUrl: string = "http://localhost:8081/";
-
   private httpLink = {
-    listAllStudentsUrl: this.apiUrl + 'student/all',
-    saveStudentUrl: this.apiUrl + 'student/saveStudent',
-    deleteStudentByIdUrl: this.apiUrl + 'student/delete'
+    listAllStudentsUrl: environment.apiUrl + 'student/all',
+    saveStudentUrl: environment.apiUrl + 'student/saveStudent',
+    deleteStudentByIdUrl: environment.apiUrl + 'student/delete'
   }
 
   constructor(private httpClient: HttpClient) {

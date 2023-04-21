@@ -9,10 +9,8 @@ import {HttpClient} from "@angular/common/http";
 })
 export class IssueBookService {
 
-  private apiUrl: string = "http://localhost:8081/issue";
-
   private httpLink = {
-    issueNewBook: this.apiUrl + "/issueNewBook",
+    issueNewBook: environment.apiUrl + 'issue/issueNewBook',
   }
   constructor(private httpClient: HttpClient) { }
 

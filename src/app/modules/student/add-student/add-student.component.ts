@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {BookService} from "../../../services/book/book.service";
-import {AlertService} from "../../../services/alert/alert.service";
 import {InputValidation} from "../../../validations/input-validation";
 import {Utils} from "../../../utils/utils";
 import {StudentService} from "../../../services/student/student.service";
@@ -24,8 +22,7 @@ export class AddStudentComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private studentService: StudentService,
-    private alertService: AlertService
+    private studentService: StudentService
   ) {
   }
 
@@ -59,7 +56,6 @@ export class AddStudentComponent implements OnInit {
   onSubmit() {
     this.errorMessage = '';
     this.submitted = true;
-    this.alertService.clear();
     if (this.form.invalid) {
       return;
     }
@@ -70,7 +66,7 @@ export class AddStudentComponent implements OnInit {
     this.studentService.saveStudent(this.form.value)
       .subscribe((data: any) => {
           console.log("Success Logged In");
-          this.errorMessage = 'Added New Student successful';
+          this.errorMessage = 'Saved Student '+data.studentName+' Successfully';
           this.loading = false;
           this.submitted = false;
           this.formFields();
@@ -78,8 +74,7 @@ export class AddStudentComponent implements OnInit {
         },
         (error: any) => {
           console.log("Register Failed ::" + error);
-          this.errorMessage = error.status + ' ' + error.error.message;
-          //this.alertService.error(error);
+          this.errorMessage = error;
           this.loading = false;
         });
   }
@@ -97,6 +92,7 @@ export class AddStudentComponent implements OnInit {
   }
 
   clearFields() {
+    this.submitted = false;
     this.formFields();
   }
 }
