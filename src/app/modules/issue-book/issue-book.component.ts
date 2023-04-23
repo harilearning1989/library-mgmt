@@ -47,7 +47,7 @@ export class IssueBookComponent implements OnInit {
     this.issueBookService.register(this.form.value)
       .subscribe((data: any) => {
           console.log("Success Logged In");
-          this.errorMessage = data.status + ' ' + data.message;
+          this.errorMessage = data.status +' '+ data.message;
           this.loading = false;
           this.submitted = false;
           this.formFields();
@@ -74,16 +74,20 @@ export class IssueBookComponent implements OnInit {
         Validators.maxLength(10), InputValidation.cannotContainSpace]],
       studentName: ['', [Validators.required, Validators.minLength(4),
         Validators.maxLength(20)]],
-      subject: ['', [Validators.required, Validators.minLength(4),
-        Validators.maxLength(20)]],
-      bookName: ['', [Validators.required, Validators.minLength(4),
-        Validators.maxLength(50)]],
       isbn: ['', [Validators.required, Validators.minLength(4),
         Validators.maxLength(20), InputValidation.cannotContainSpace]],
+      subject: ['', [Validators.required, Validators.minLength(4),
+        Validators.maxLength(80)]],
+      bookName: ['', [Validators.required, Validators.minLength(4),
+        Validators.maxLength(80)]],
       authors: ['', [Validators.required, Validators.minLength(4),
-        Validators.maxLength(50)]],
+        Validators.maxLength(500)]],
       price: ['', [Validators.required, Validators.minLength(3),
         Validators.maxLength(10), InputValidation.cannotContainSpace]],
     });
+  }
+
+  clearFields() {
+    this.errorMessage = '';
   }
 }

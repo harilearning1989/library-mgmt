@@ -14,6 +14,7 @@
             <div *ngIf="f.studentId.errors.required">Student Id is required</div>
             <div *ngIf="f.studentId.errors.cannotContainSpace">Student Id cannot contain spaces</div>
             <div *ngIf="f.studentId.errors.minlength">Student Id must be at least 4 characters</div>
+            <div *ngIf="f.studentId.errors.maxlength">Student Id max 10 characters allowed</div>
           </div>
         </div></td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <td><div class="mb-3">
@@ -26,6 +27,7 @@
             <div *ngIf="f.isbn.errors.required">ISBN is required</div>
             <div *ngIf="f.isbn.errors.cannotContainSpace">ISBN cannot contain spaces</div>
             <div *ngIf="f.isbn.errors.minlength">ISBN must be at least 4 characters</div>
+            <div *ngIf="f.isbn.errors.maxlength">ISBN max 20 characters allowed</div>
           </div>
         </div></td>
         </tr>
@@ -41,6 +43,7 @@
           <div *ngIf="f.studentName.errors.required">Student Name is required</div>
           <div *ngIf="f.studentName.errors.cannotContainSpace">Student Name cannot contain spaces</div>
           <div *ngIf="f.studentName.errors.minlength">Student Name must be at least 4 characters</div>
+          <div *ngIf="f.studentName.errors.maxlength">Student Name max 20 characters allowed</div>
         </div>
       </div>
       <div class="mb-3">
@@ -53,6 +56,7 @@
           <div *ngIf="f.subject.errors.required">Subject is required</div>
           <div *ngIf="f.subject.errors.cannotContainSpace">Subject cannot contain spaces</div>
           <div *ngIf="f.subject.errors.minlength">Subject must be at least 4 characters</div>
+          <div *ngIf="f.subject.errors.maxlength">Student Name max 80 characters allowed</div>
         </div>
       </div>
 
@@ -66,6 +70,7 @@
           <div *ngIf="f.bookName.errors.required">Book Name is required</div>
           <div *ngIf="f.bookName.errors.cannotContainSpace">Book Name cannot contain spaces</div>
           <div *ngIf="f.bookName.errors.minlength">Book Name must be at least 4 characters</div>
+          <div *ngIf="f.bookName.errors.maxlength">Book Name max 80 characters allowed</div>
         </div>
       </div>
 
@@ -79,6 +84,7 @@
           <div *ngIf="f.authors.errors.required">Authors is required</div>
           <div *ngIf="f.authors.errors.cannotContainSpace">Authors cannot contain spaces</div>
           <div *ngIf="f.authors.errors.minlength">Authors must be at least 4 characters</div>
+          <div *ngIf="f.authors.errors.maxlength">Authors max 80 characters allowed</div>
         </div>
       </div>
 
@@ -92,6 +98,7 @@
           <div *ngIf="f.price.errors.required">Price is required</div>
           <div *ngIf="f.price.errors.cannotContainSpace">Price cannot contain spaces</div>
           <div *ngIf="f.price.errors.minlength">Price must be at least 4 characters</div>
+          <div *ngIf="f.price.errors.maxlength">Price max 10 characters allowed</div>
         </div>
       </div>
 
@@ -99,7 +106,8 @@
         <button [disabled]="loading" class="btn btn-primary">
           <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
           Submit
-        </button>&nbsp;&nbsp;
+        </button>&nbsp;
+        <button class="btn btn-primary" (click)="clearFields()">Clear</button>
         <span class="text-danger" style="padding-left: 10px">{{errorMessage}}</span>
       </div>
     </form>

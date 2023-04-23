@@ -9,6 +9,7 @@
       <th>Student</th>
       <th>Authors</th>
       <th>Price</th>
+      <th>Issue Date</th>
       <th>Action</th>
     </tr>
     </thead>
@@ -22,6 +23,7 @@
         <span>{{ book.authors | slice: 0:limit }}</span>
       </td>
       <td>{{ book.price }}</td>
+      <td>{{ book.issuedDate }}</td>
       <td>
         <button style="background-color: cornflowerblue" (click)="returnBook(book)">Return</button>
       </td>

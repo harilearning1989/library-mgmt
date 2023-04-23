@@ -8,4 +8,5 @@ export class IssueBook {
   isbn?: string;
   authors?: string;
   price?: bigint;
+  issuedDate?:Date;
 }
