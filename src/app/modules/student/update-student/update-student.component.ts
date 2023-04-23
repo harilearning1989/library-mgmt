@@ -21,21 +21,10 @@ export class UpdateStudentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.dtOptions = {
-      destroy: true,
-      ordering: true,
-      scrollY: '450px',
-      pagingType: 'full_numbers',
-      pageLength: 25,
-      processing: true,
-      columnDefs: [{
-        targets: 0
-      }]
-    };
-    this.listAllStudents();
+    this.loadDataTable();
   }
 
-  async listAllStudents() {
+  listAllStudents() {
     this.studentService.listAllStudents().subscribe((data: any) => {
         if (data != null) {
           this.allStudents = data;
@@ -66,8 +55,25 @@ export class UpdateStudentComponent implements OnInit, OnDestroy {
       .subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['../update'], {relativeTo: this.route});
+          this.dtTrigger.unsubscribe();
+          this.loadDataTable();
+          //this.router.navigate(['../update'], {relativeTo: this.route});
         },
         error => console.log(error));
+  }
+
+  private loadDataTable() {
+    this.dtOptions = {
+      destroy: true,
+      ordering: true,
+      scrollY: '450px',
+      pagingType: 'full_numbers',
+      pageLength: 25,
+      processing: true,
+      columnDefs: [{
+        targets: 0
+      }]
+    };
+    this.listAllStudents();
   }
 }
