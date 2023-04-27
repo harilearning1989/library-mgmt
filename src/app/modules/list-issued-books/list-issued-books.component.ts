@@ -19,19 +19,7 @@ export class ListIssuedBooksComponent implements OnInit,OnDestroy{
   constructor(private bookService: BookService) { }
 
   ngOnInit(): void {
-    this.dtOptions = {
-      destroy: true,
-      ordering: true,
-      scrollY: '500px',
-      pagingType: 'full_numbers',
-      pageLength: 25,
-      processing: true,
-      columnDefs: [{
-        targets: 0
-      }]
-    };
-
-    this.listIssuedBooks();
+    this.loadDataTable();
   }
 
   async listIssuedBooks() {
@@ -58,6 +46,7 @@ export class ListIssuedBooksComponent implements OnInit,OnDestroy{
 
   returnBook(book: IssueBook) {
     if(window.confirm('Are sure you want to return this item ?')){
+      //this.bookService.returnBook()
       alert(book.id);
     }
 
@@ -67,5 +56,20 @@ export class ListIssuedBooksComponent implements OnInit,OnDestroy{
     } else {
       text = "You canceled!";
     }*/
+  }
+
+  private loadDataTable() {
+    this.dtOptions = {
+      destroy: true,
+      ordering: true,
+      scrollY: '500px',
+      pagingType: 'full_numbers',
+      pageLength: 25,
+      processing: true,
+      columnDefs: [{
+        targets: 0
+      }]
+    };
+    this.listIssuedBooks();
   }
 }
