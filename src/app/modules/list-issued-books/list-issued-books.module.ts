@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {ListIssuedBooksComponent} from "./list-issued-books.component";
 import {DataTablesModule} from "angular-datatables";
+import {FormsModule} from "@angular/forms";
 
 const routes: Routes = [
   {  path: '', component: ListIssuedBooksComponent }
@@ -14,7 +15,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    DataTablesModule
+    DataTablesModule,
+    FormsModule
   ]
 })
 export class ListIssuedBooksModule { }

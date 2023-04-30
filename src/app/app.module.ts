@@ -66,3 +66,7 @@ sudo npm install angular-datatables --save
 sudo npm install @types/jquery --save-dev
 sudo npm install @types/datatables.net --save-dev
  */
+
+/*
+npm install --save @ng-bootstrap/ng-bootstrap
+*/

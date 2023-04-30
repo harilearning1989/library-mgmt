@@ -25,9 +25,44 @@
       <td>{{ book.price }}</td>
       <td>{{ book.issuedDate }}</td>
       <td>
-        <button style="background-color: cornflowerblue" (click)="returnBook(book)">Return</button>
+        <!--<button style="background-color: cornflowerblue" (click)="returnBook(book)">Return</button>-->
+        <button style="background-color: cornflowerblue" (click)="openPopup(book)">Return</button>
       </td>
     </tr>
     </tbody>
   </table>
+</div>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-primary">Return Issued Book</h4>
+        <button type="button" class="close btn btn-danger" (click)="closePopup()"
+                data-dismiss="modal">
+          ×
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-xl-12">
+          <label>Book Name :</label>
+          <span> {{bookName}}</span><br/><br/>
+          <label>Return Date :</label>&nbsp;&nbsp;
+          <input type="datetime-local" id="birthdaytime" name="birthdaytime" [(ngModel)]="returnDate">
+        </div>
+      </div>
+      <br/><br/>
+      <div class="modal-footer">
+        <span class="text-danger">{{errorMessage}}</span>
+        <button [disabled]="loading" class="btn btn-primary" (click)="returnIssuedBook()">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+          Return Book
+        </button>&nbsp;
+        <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

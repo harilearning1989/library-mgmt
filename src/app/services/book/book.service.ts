@@ -16,7 +16,8 @@ export class BookService {
     searchBook: environment.apiUrl + 'book/searchBook',
     saveBookUrl: environment.apiUrl + 'book/create',
     updateBookUrl: environment.apiUrl + 'book/updateBook',
-    deleteBookById: environment.apiUrl + 'book/delete'
+    deleteBookById: environment.apiUrl + 'book/delete',
+    returnIssuedBookUrl: environment.apiUrl + 'return/returnIssuedBook',
   }
 
   constructor(private httpClient: HttpClient) {}
@@ -58,5 +59,9 @@ export class BookService {
 
   deleteBookById(id: number) {
     return this.httpClient.delete(this.httpLink.deleteBookById + '/' + id);
+  }
+
+  returnIssuedBook( issueBookTmp: IssueBook) {
+    return this.httpClient.patch(this.httpLink.returnIssuedBookUrl, issueBookTmp);
   }
 }

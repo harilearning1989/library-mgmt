@@ -46,7 +46,6 @@ export class IssueBookComponent implements OnInit {
 
     this.issueBookService.register(this.form.value)
       .subscribe((data: any) => {
-          console.log("Success Logged In");
           this.errorMessage = data.status +' '+ data.message;
           this.loading = false;
           this.submitted = false;
